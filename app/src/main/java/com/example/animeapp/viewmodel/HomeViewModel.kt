@@ -4,12 +4,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.animeapp.data.remote.dto.AnimeData
 import com.example.animeapp.data.repository.AnimeRepository
+import dagger.hilt.android.HiltAndroidApp
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel(private val repository: AnimeRepository) : ViewModel() {
+@HiltViewModel
+class HomeViewModel @Inject constructor(private val repository: AnimeRepository) : ViewModel() {
     private val _animeListState = MutableStateFlow<UiState<List<AnimeData>>>(UiState.Loading)
     val animeListState: StateFlow<UiState<List<AnimeData>>> = _animeListState.asStateFlow()
 

@@ -18,13 +18,12 @@ import com.example.animeapp.ui.screens.reusableComposables.ErrorMessage
 import com.example.animeapp.ui.screens.reusableComposables.LoadingIndicator
 import com.example.animeapp.viewmodel.HomeViewModel
 import com.example.animeapp.viewmodel.UiState
-import com.example.animeapp.viewmodel.ViewModelFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     navController: NavController,
-    viewModel: HomeViewModel = viewModel(factory = ViewModelFactory)
+    viewModel: HomeViewModel
 ) {
     val uiState by viewModel.animeListState.collectAsState()
 

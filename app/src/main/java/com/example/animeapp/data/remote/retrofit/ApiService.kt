@@ -14,14 +14,14 @@ interface JikanApiService {
     @GET("anime/{id}")
     suspend fun getAnimeDetails(@Path("id") animeId: Int): AnimeDetailResponse
 
-    companion object {
-        private const val BASE_URL = "https://api.jikan.moe/v4/"
-        fun create(): JikanApiService {
-            val retrofit = Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-            return retrofit.create(JikanApiService::class.java)
-        }
-    }
+//    companion object {
+//        private const val BASE_URL = "https://api.jikan.moe/v4/"
+//        fun create(): JikanApiService {
+//            val retrofit = Retrofit.Builder()
+//                .baseUrl(BASE_URL)
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build()
+//            return retrofit.create(JikanApiService::class.java)
+//        }
+//    }
 }

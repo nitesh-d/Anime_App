@@ -24,16 +24,14 @@ import com.example.animeapp.ui.screens.reusableComposables.ErrorMessage
 import com.example.animeapp.ui.screens.reusableComposables.LoadingIndicator
 import com.example.animeapp.viewmodel.DetailViewModel
 import com.example.animeapp.viewmodel.UiState
-import com.example.animeapp.viewmodel.ViewModelFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(
     animeId: Int,
     navController: NavController,
-    viewModel: DetailViewModel = viewModel(factory = ViewModelFactory)
+    viewModel: DetailViewModel
 ) {
-    // Fetch details when the composable enters the composition
     viewModel.fetchAnimeDetails(animeId)
 
     val uiState by viewModel.animeDetailState.collectAsState()

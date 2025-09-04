@@ -18,13 +18,15 @@ class DetailViewModel @Inject constructor(private val repository: AnimeRepositor
 
     fun fetchAnimeDetails(animeId: Int) {
         viewModelScope.launch {
-            _animeDetailState.value = UiState.Loading
-            try {
-                val response = repository.getAnimeDetails(animeId)
-                _animeDetailState.value = UiState.Success(response.data)
-            } catch (e: Exception) {
-                _animeDetailState.value = UiState.Error(e.message ?: "An unknown error occurred")
+            repository.getAnimeDetails(animeId).collect { anime ->
+                if (anime != null) {
+                    _animeDetailState.value = UiState.Success(anime)
+                }
             }
+        }
+
+        viewModelScope.launch {
+            repository.refreshAnimeDetails(animeId)
         }
     }
 }

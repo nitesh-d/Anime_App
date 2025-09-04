@@ -19,10 +19,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
 import com.example.animeapp.data.remote.dto.AnimeData
+import com.example.animeapp.ui.screens.reusableComposables.YoutubeScreen
 
 
+@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun AnimeDetailsContent(anime: AnimeData) {
     Column(
@@ -30,22 +34,33 @@ fun AnimeDetailsContent(anime: AnimeData) {
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        // Here you would implement the video player.
-        // For this example, we just show the poster image.
-        AsyncImage(
-            model = anime.images.jpg.largeImageUrl,
-            contentDescription = anime.title,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(250.dp)
-                .clip(RoundedCornerShape(12.dp)),
-            contentScale = ContentScale.Crop
-        )
+
+        if (!anime.trailer?.youtubeId.isNullOrEmpty()) {
+            YoutubeScreen(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(250.dp)
+                    .clip(RoundedCornerShape(12.dp)),
+                youtubeVideoId = anime.trailer.youtubeId,
+                lifecycleOwner = LocalLifecycleOwner.current
+            )
+
+        } else {
+            GlideImage(
+                model = anime.images.jpg.largeImageUrl,
+                contentDescription = anime.title,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(250.dp)
+                    .clip(RoundedCornerShape(12.dp)),
+                contentScale = ContentScale.Crop
+            )
+        }
 
         Spacer(modifier = Modifier.height(16.dp))
         Text(anime.title, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
         Spacer(modifier = Modifier.height(8.dp))
-        Text("⭐ Score: ${anime.score ?: "N/A"}  |  Episodes: ${anime.episodes ?: "N/A"}")
+        Text("⭐ Rating: ${anime.score ?: "N/A"}  |  Episodes: ${anime.episodes ?: "N/A"}")
         Spacer(modifier = Modifier.height(8.dp))
         Text("Genres: ${anime.genres?.joinToString { it.name } ?: "Not available"}", style = MaterialTheme.typography.bodyMedium)
         Spacer(modifier = Modifier.height(16.dp))

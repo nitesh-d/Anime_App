@@ -15,15 +15,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
 import com.example.animeapp.data.remote.dto.AnimeData
 
+@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun AnimeCard(anime: AnimeData, onClick: () -> Unit) {
     Card(
@@ -34,11 +34,8 @@ fun AnimeCard(anime: AnimeData, onClick: () -> Unit) {
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {
         Column {
-            AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(anime.images.jpg.largeImageUrl)
-                    .crossfade(true)
-                    .build(),
+            GlideImage(
+                model = anime.images.jpg.largeImageUrl,
                 contentDescription = anime.title,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier

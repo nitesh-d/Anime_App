@@ -137,11 +137,12 @@ fun shareAnime(context: Context, animeTitle: String) {
 
 @Composable
 private fun ActionButton(icon: ImageVector, text: String, onClick: () -> Unit) {
-    OutlinedButton(
+    ElevatedButton(
         onClick = onClick,
         shape = RoundedCornerShape(50), // Fully rounded
-        colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.White),
-        border = BorderStroke(1.dp, Color.White.copy(alpha = 0.7f))
+        elevation = ButtonDefaults.buttonElevation(18.dp),
+        colors = ButtonDefaults.buttonColors(contentColor = Color.White, containerColor = Color.Gray.copy(alpha = 0.3f)),
+        //border = BorderStroke(1.dp, Color.White.copy(alpha = 0.7f))
     ) {
         Icon(imageVector = icon, contentDescription = text, modifier = Modifier.size(20.dp))
         Spacer(modifier = Modifier.width(8.dp))

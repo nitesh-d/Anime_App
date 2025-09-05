@@ -34,7 +34,8 @@ fun HomeScreen(
     viewModel: HomeViewModel
 ) {
     val uiState by viewModel.animeListState.collectAsState()
-        Scaffold(
+
+    Scaffold(
             containerColor = androidx.compose.ui.graphics.Color.Transparent,
             topBar = {
                 TopAppBar(

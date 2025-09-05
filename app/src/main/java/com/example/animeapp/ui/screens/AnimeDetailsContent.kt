@@ -139,7 +139,7 @@ fun shareAnime(context: Context, animeTitle: String) {
 private fun ActionButton(icon: ImageVector, text: String, onClick: () -> Unit) {
     ElevatedButton(
         onClick = onClick,
-        shape = RoundedCornerShape(50), // Fully rounded
+        shape = RoundedCornerShape(50),
         elevation = ButtonDefaults.buttonElevation(18.dp),
         colors = ButtonDefaults.buttonColors(contentColor = Color.White, containerColor = Color.Gray.copy(alpha = 0.3f)),
         //border = BorderStroke(1.dp, Color.White.copy(alpha = 0.7f))
@@ -180,7 +180,7 @@ fun GenreTags(genres: List<Genre>) {
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
     ) {
-        genres.take(3).forEach { genre -> // Take up to 3 genres to avoid overflow
+        genres.take(3).forEach { genre ->
             Card(
                 shape = RoundedCornerShape(50),
                 colors = CardDefaults.cardColors(containerColor = Color.White.copy(alpha = 0.15f))

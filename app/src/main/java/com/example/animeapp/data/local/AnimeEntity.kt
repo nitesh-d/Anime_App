@@ -16,5 +16,6 @@ data class AnimeEntity(
     val score: Double?,
     val synopsis: String?,
     val trailer: Trailer?,
-    val genres: List<Genre>?
+    val genres: List<Genre>?,
+    val titleEnglish: String
 )

@@ -31,6 +31,7 @@ fun AnimeCard(anime: AnimeData, onClick: () -> Unit) {
             .fillMaxWidth()
             .clickable(onClick = onClick),
         shape = RoundedCornerShape(8.dp),
+        elevation = CardDefaults.cardElevation(10.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {
         Column {
@@ -46,7 +47,7 @@ fun AnimeCard(anime: AnimeData, onClick: () -> Unit) {
                 modifier = Modifier.padding(12.dp)
             ) {
                 Text(
-                    text = anime.title,
+                    text = anime.titleEnglish.toString(),
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp,
                     maxLines = 1,
